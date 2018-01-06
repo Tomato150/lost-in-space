@@ -9,37 +9,55 @@ export default styles = StyleSheet.create({
         paddingTop: 24,
     },
     horizontalRule: {
-        borderBottomColor: "#FFF",
-        width: "90%",
+        borderColor: "#FFF",
+        width: "30%",
         borderBottomWidth: 1,
         height: 1,
         margin: 5,
     },
     hrMarginLarge: {
-        margin: 15
+        width: "90%",
+        marginTop: 15,
+        marginBottom: 15,
     },
 
-    header: {
-        alignItems: "center", // Horizontal Axis
-        justifyContent: "flex-start",
-        margin: 10,
-    },
     content: {
-        backgroundColor: "#000"
+        flex: 2,
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        marginBottom: 15
     },
+
     eventChoice: {
         backgroundColor: "#003264",
         borderRadius: 5,
-        padding: 5,
+        padding: 10,
         margin: 5,
+
+    },
+
+    Defensive: {
+        backgroundColor: "#003264",
+    },
+
+    DefensiveBright: {
+        backgroundColor: "#0059b3"
     },
 
     Passive: {
-        backgroundColor: "#006332"
+        backgroundColor: "#006432"
     },
 
     Aggressive: {
         backgroundColor: "#610000"
+    },
+
+    PassiveBright: {
+        backgroundColor: "#00b359"
+    },
+
+    AggressiveBright: {
+        backgroundColor: "#b30000"
     }
 
 });
