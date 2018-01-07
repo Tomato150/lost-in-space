@@ -1,20 +1,40 @@
 import React, {Component} from 'react';
-import {ScrollView, View, FlatList, Text} from 'react-native';
-import CustomText from './components/utils/custom-text'
-import styles from './components/styles'
+import {ScrollView, View, FlatList, Text, Button, TouchableOpacity} from 'react-native';
+import CustomText from './utils/custom-text'
+import styles from './utils/styles'
 
 export default class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentlyViewing: "EventPhase"
+        };
+    }
+
+    changeCurrentView = () => {
+        let current = "EventPhase";
+        if (this.state.currentlyViewing === "EventPhase") {
+            current = "SelectedChoice"
+        }
+        this.setState({
+            currentlyViewing: current
+        })
+    };
+
     render() {
-        return (
-            <SelectedChoice/>
-        );
+        if (this.state.currentlyViewing === "EventPhase") {
+            return (<EventPhase clickerEvent={this.changeCurrentView}/>)
+        } else {
+            return (<SelectedChoice clickerEvent={this.changeCurrentView}/>)
+        }
     }
 }
 
 class EventPhase extends Component {
     render() {
+        const {clickerEvent} = this.props;
         return (
-            <ScrollView>
+            <ScrollView style={{backgroundColor: "#000"}}>
                 <View style={styles.container}>
                     <View style={[styles.content, {alignItems: "center"}]}>
                         <CustomText>Lost in Space</CustomText>
@@ -55,7 +75,7 @@ class EventPhase extends Component {
                                     choiceTitle: "Choice II: Scout for other survivors",
                                     choiceText: "You move to a ship wide scanner ... ",
                                     eventStyle: "Aggressive"
-                                }, {
+                                }, /*{
                                     key: "3",
                                     choiceTitle: "Choice III: Organize with the crew",
                                     choiceText: "You start talking with the others, slowly and surely making your way" +
@@ -79,24 +99,30 @@ class EventPhase extends Component {
                                     choiceText: "You start talking with the others, slowly and surely making your way" +
                                     " around to everyone nearby ... ",
                                     eventStyle: "Passive"
-                                }
+                                }*/
                             ]}
                             renderItem={({item}) => {
                                 return (
-                                    <View style={[styles.eventChoice, styles[item.eventStyle]]}>
-                                        <Text style={{
-                                            textDecorationLine: "underline",
-                                            color: "#FFF",
-                                            textAlign: "center"
-                                        }}>{item.choiceTitle}</Text>
-                                        <Text style={{color: "#FFF"}}>
-                                            {item.choiceText}
-                                        </Text>
-                                    </View>
+                                    <TouchableOpacity
+                                        onPress={() => {clickerEvent()}}
+                                    >
+                                        <View style={[styles.eventChoice, styles[item.eventStyle]]}>
+                                            <Text style={{
+                                                textDecorationLine: "underline",
+                                                color: "#FFF",
+                                                textAlign: "center"
+                                            }}>{item.choiceTitle}</Text>
+                                            <Text style={{color: "#FFF"}}>
+                                                {item.choiceText}
+                                            </Text>
+                                        </View>
+                                    </TouchableOpacity>
                                 )
                             }}
                         />
                     </View>
+
+
                 </View>
             </ScrollView>
         )
@@ -105,6 +131,7 @@ class EventPhase extends Component {
 
 class SelectedChoice extends Component {
     render() {
+        const {clickerEvent} = this.props;
         return (
             <ScrollView style={{backgroundColor: "#000"}}>
                 <View style={styles.container}>
@@ -162,9 +189,13 @@ class SelectedChoice extends Component {
                     </View>
 
                     <View style={[styles.content, {alignItems: "center"}]}>
-                        <View style={[styles.eventChoice, {width:"20%"}]}>
-                            <CustomText center>Continue</CustomText>
-                        </View>
+                        <TouchableOpacity
+                            onPress={() => {clickerEvent()}}
+                        >
+                            <View style={[styles.eventChoice, {width:"20%"}]}>
+                                <CustomText center>Continue</CustomText>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </ScrollView>

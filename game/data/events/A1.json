@@ -1,3 +1,34 @@
 {
-    "storyText": "You wake up on your ship. You see a few stumbling next to you, heaving the contents of their stomachs. The first thing to hit your senses is the stark coldness of the room.\n You glance around to see many other of your crew are 'asleep', acryogenically frozen next to you. You, as captain, deduct that there must be a ship wide catastrophe to have so many teleported to this one room. You don't find the room to be the bridge, either, indicating the containment shielding must have failed there as well.\n It's easy to tell that something bad happened, and you need to take the lead in fixing whatever went down. As an unfortunate side effect of the cryogenic sleep, you've forgotten recent memories, ranging all the way back to what you think is the time you left the waryards, supposedly on this mission. Who knows how long you've been out."
+  "storyNodes": {
+    "entry": {
+      "storyText": "You wake up on your ship. You see a few stumbling next to you, heaving the contents of their stomachs. The first thing to hit your senses is the stark coldness of the room.\n You glance around to see many other of your crew are 'asleep', acryogenically frozen next to you. You, as captain, deduct that there must be a ship wide catastrophe to have so many teleported to this one room. You don't find the room to be the bridge, either, indicating the containment shielding must have failed there as well.\n It's easy to tell that something bad happened, and you need to take the lead in fixing whatever went down. As an unfortunate side effect of the cryogenic sleep, you've forgotten recent memories, ranging all the way back to what you think is the time you left the waryards, supposedly on this mission. Who knows how long you've been out.",
+      "choiceNodes": ["a1", "a2"]
+    },
+    "a1": {
+      "storyText": "You start talking with the others, slowly and surely making your way around to everyone nearby",
+      "choiceNodes": ["a2"]
+    }
+    // If (jsonFile.storyNodes.a1.choiceNodes) {do choice stuff} else if (jsonFile.storyNodes.a1.results) {do results stuff}
+  },
+  "choices": {
+    "a1": {
+      "key": "a1",
+      "choiceTitle": "Choice I: Organize with the crew",
+      "choiceText": "You start talking with the others, slowly and surely making your way around to everyone nearby ... ",
+      "eventStyle": "Passive"
+    },
+    "a2": {
+      "key": "a2",
+      "choiceTitle": "Choice II: Scout for other survivors",
+      "choiceText": "You move to a ship wide scanner ... ",
+      "choiceFullText": "You move to a ship wide scanner, and it reveals three more pockets of crew, ",
+      "eventStyle": "Aggressive"
+    }
+  },
+  "results": [
+    {
+      "resultType": "positive/negative/neutral/interesting",
+      "resultText": "The filler text"
+    }
+  ]
 }
