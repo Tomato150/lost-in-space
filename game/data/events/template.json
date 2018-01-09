@@ -1,49 +1,69 @@
 {
-  "eventTitle": "Act 1 - Opening",
-  "storyNodes": {
+  "event_title": "Act 1 - Opening",
+  "story_nodes": {
+    /*
+    "a1": {
+      "story_text": "",
+      "results": [
+        {
+          "effect": "",
+          "result_text": ""
+        }
+      ],
+      "choice_nodes": []
+    },
+    */
 
-    "entryNode": {
-      "storyText": "Filler story text for entry",
+    "entry": {
+      "story_text": "Filler story text for entry",
       "results": false,  // or false, if there is no effects from this point
-      "choiceNodes": ["a1", "a2"]  // or false, if it ends here. if false, then switch from event to management phase.
+      "choice_nodes": ["a1", "a2"]  // or false, if it ends here. if false, then switch from event to management phase.
     },
 
     "a1": {
-      "storyText": "Filler Story Text for A1",
+      "story_text": "Filler Story Text for A1",
       "results": [
         {
           "effect": "set-engineering +10", // example command (Hidden from user)
-          "resultText": "Interesting game text goes here"
+          "result_text": "Interesting game text goes here"
         }
       ],
-      "choiceNodes": ["a2"]
+      "choice_nodes": ["a2"]
     },
 
     "a2": {
-      "storyText": "Filler story text for A2 ",
+      "story_text": "Filler story text for A2 ",
       "results": [
         {
           "effect": "set-life-support +10",
-          "resultText": "Interesting game text goes here"
+          "result_text": "Interesting game text goes here"
         }
       ],
-      "choiceNodes": false
+      "choice_nodes": false
     }
 
   },
-  "choiceNode": {
+  "choice_nodes": {
+    /*
+      "choice_title": "",
+      "choice_text": "",
+      "event_type": "",
+
+      "conditions": {}
+    */
 
     "a1": {
-      "choiceTitle": "The title of the choice",
-      "choiceShortText": "Short text in the choice box",
-      "eventType": "color of the event", // Maybe replace with the style of event "Passive, Aggressive" and so on
+      "choice_title": "The title of the choice",
+      "choice_text": "Short text in the choice box",
+      "event_type": "color of the event", // Maybe replace with the style of event "Passive, Aggressive" and so on
 
       "conditions": {}
     },
+
     "a2": {
-      "choiceTitle": "The title of the choice",
-      "choiceShortText": "Short text in the choice box",
-      "eventType": "color of the event",
+      "choice_title": "The title of the choice",
+      "choice_text": "Short text in the choice box",
+      "event_type": "color of the event",
 
       "conditions": {}
     }

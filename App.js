@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {ScrollView, View, FlatList, Text, Button, TouchableOpacity} from 'react-native';
+
+import GameEvent from './containers/game-event';
+
 import CustomText from './utils/custom-text'
 import styles from './utils/styles'
 
@@ -22,11 +25,22 @@ export default class App extends Component {
     };
 
     render() {
-        if (this.state.currentlyViewing === "EventPhase") {
+        return (
+            <ScrollView style={{backgroundColor: "#000"}}>
+                <View style={styles.container}>
+                    <View style={[styles.content, {alignItems: "center"}]}>
+                        <CustomText>Lost in Space</CustomText>
+                        <View style={styles.horizontalRule}/>
+                        <CustomText>Event Phase</CustomText>
+                    </View>
+                    <GameEvent/>
+                </View>
+            </ScrollView>);
+        /*if (this.state.currentlyViewing === "EventPhase") {
             return (<EventPhase clickerEvent={this.changeCurrentView}/>)
         } else {
             return (<SelectedChoice clickerEvent={this.changeCurrentView}/>)
-        }
+        }*/
     }
 }
 
@@ -190,9 +204,11 @@ class SelectedChoice extends Component {
 
                     <View style={[styles.content, {alignItems: "center"}]}>
                         <TouchableOpacity
-                            onPress={() => {clickerEvent()}}
+                            onPress={() => {
+                                clickerEvent()
+                            }}
                         >
-                            <View style={[styles.eventChoice, {width:"20%"}]}>
+                            <View style={[styles.eventChoice, {width: "20%"}]}>
                                 <CustomText center>Continue</CustomText>
                             </View>
                         </TouchableOpacity>
