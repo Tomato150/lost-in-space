@@ -36,6 +36,12 @@ export default styles = StyleSheet.create({
 
     },
 
+    event_choice_text: {
+        textDecorationLine: "underline",
+        color: "#FFF",
+        textAlign: "center"
+    },
+
     Defensive: {
         backgroundColor: "#003264",
     },

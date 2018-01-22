@@ -1,0 +1,20 @@
+{
+  "event_title": "Act I - Old Beginnings",
+  "story_name": "A2",
+
+  "story_nodes": {
+    "entry": {
+      "story_text": "",
+      "results": false,
+      "choice_nodes": []
+    }
+  },
+
+  "choice_nodes": {
+    "A1": {
+      "choice_title": "",
+      "choice_text": "",
+      "choice_color": "#003264"
+    }
+  }
+}

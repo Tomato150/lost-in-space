@@ -14,9 +14,7 @@ export default class Text extends Component {
 
     render() {
         const {style, color} = this.props;
-        let newStyle = style,
-            contents;
-
+        let newStyle = new Object(style);
 
         if (!(style.color) || color) {
             newStyle = {
