@@ -6,7 +6,7 @@
     "entry": {
       "story_text": "You wake up on your ship. You see a few stumbling next to you, heaving the contents of their stomachs. The first thing to hit your senses is the stark coldness and the dimmness of the room.\n You glance around to see many other of your crew are 'asleep', acryogenically frozen next to you. You, as captain, deduct that there must be a ship wide catastrophe to have so many teleported to this one room. You don't find the room to be the bridge, either, indicating the containment shielding must have failed there as well.\n It's easy to tell that something bad happened, and you need to take the lead in fixing whatever went down. As an unfortunate side effect of the cryogenic sleep, you've forgotten recent memories, ranging all the way back to what you think is the time you left the shipyards, supposedly on this mission. Who knows how long you've been out.",
       "results": false,
-      "choice_nodes": ["C1", "C2"]
+      "choice_nodes": ["S1", "S2"]
     },
 
     "S1": {
@@ -25,7 +25,7 @@
           "conditions": false
         }
       ],
-      "choice_nodes": ["C2"]
+      "choice_nodes": ["S2"]
     },
 
     "S2": {
@@ -54,13 +54,13 @@
   },
 
   "choice_nodes": {
-    "C1": {
+    "S1": {
       "choice_title": "Choice I: Organize with the crew",
       "choice_text": "You start talking with the others, slowly and surely making your way around to everyone nearby ... ",
       "choice_color": "#003264"
     },
 
-    "C2": {
+    "S2": {
       "choice_title": "Choice II: Scout for other survivors",
       "choice_text": "You move to a ship wide scanner ... ",
       "choice_color": "#003264"

@@ -1,13 +1,13 @@
 import {StyleSheet} from "react-native";
 
-export default styles = StyleSheet.create({
+export const app_styles = StyleSheet.create({
     container: {
-        flex: 1,
         flexDirection: "column",
         backgroundColor: "#000",
-        padding: 10, // TODO find workaround for the top nav bar.
+        padding: 10,
         paddingTop: 24,
     },
+
     horizontalRule: {
         borderColor: "#FFF",
         width: "30%",
@@ -15,6 +15,7 @@ export default styles = StyleSheet.create({
         height: 1,
         margin: 5,
     },
+
     hrMarginLarge: {
         width: "90%",
         marginTop: 15,
