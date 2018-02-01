@@ -1,27 +1,25 @@
 // @flow
 import React from 'react';
-
 import {View, TouchableOpacity, FlatList, Text} from 'react-native';
 import CustomText from '../utils/customtext';
 import {app_styles} from '../utils/appstyles';
-
 import type {ChoiceNode} from "../game/stories/storyevent";
-import {updateStoryNode, finishStory} from "../actions/storyactions";
 
 
 type Props = {
     story_choice_nodes: {[string]: ChoiceNode},
+    storyFinished: () => void,
     choice_nodes_to_render: false | Array<string>,
-    dispatch: Function,
+    onChoiceClickHandler: (string) => void,
 }
 
 export default function StoryChoices(props: Props) {
-    const {story_choice_nodes, choice_nodes_to_render, dispatch} = props;
+    const {story_choice_nodes, storyFinished, choice_nodes_to_render, onChoiceClickHandler} = props;
 
     if (!(choice_nodes_to_render)) {
         return (
             <View style={[app_styles.content, {alignItems: "center"}]}>
-                <TouchableOpacity onPress = {() => {dispatch(changeGameState); dispatch(finishStory())}}> // TODO
+                <TouchableOpacity onPress = {() => {storyFinished();}}>
                     <View style={[app_styles.eventChoice, {width: "20%"}]}>
                         <CustomText center>Continue</CustomText>
                     </View>
@@ -44,7 +42,7 @@ export default function StoryChoices(props: Props) {
             data={choices_data}
             renderItem={({item}) => {
                 return (
-                    <TouchableOpacity onPress={() => {dispatch(updateStoryNode(item.key));}}>
+                    <TouchableOpacity onPress={() => {onChoiceClickHandler(item.key);}}>
                         <View style={[app_styles.eventChoice, {backgroundColor: item.choice_color}]}>
                             <Text style={app_styles.event_choice_text}>{item.choice_title}</Text>
                             <CustomText>

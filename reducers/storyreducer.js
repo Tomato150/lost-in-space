@@ -1,6 +1,6 @@
 // @flow
-import {GET_NEW_STORY, UPDATE_STORY_NODE, FINISH_STORY} from '../actions/keywords';
-import type {GetNewStory, UpdateStoryNode, FinishStory} from "../actions/storyactions";
+import {GET_NEW_STORY, SET_NEW_STORY_NODE} from '../actions/keywords';
+import type {GetNewStory, SetNewStoryNode} from "../actions/storyactions";
 
 import StoryEvent from "../game/stories/storyevent";
 import A1E1 from "../game/stories/storyjsons/A1E1.json";
@@ -10,60 +10,58 @@ type State = {
     +story_library: {
         +[string]: StoryEvent
     },
-    +random_story_library: Array<StoryEvent>,
-    +queued_stories: Array<StoryEvent>,
-    +story_history: Array<{}>,
+    +story_history: Array<Array<string>>,
 
     +current_story: StoryEvent | null,
     +current_story_node: string | null,
-    +current_story_history: Array<string>
+    +current_story_history: Array<string>,
+    +story_queue: Array<StoryEvent>
 }
 
-type StoryAction = GetNewStory | UpdateStoryNode | FinishStory// add new types here.
-let story_library = {
-    A1E1: new StoryEvent(A1E1)
-};
+type StoryAction = GetNewStory  // add new types here.
 
 const storyReducer = (
-    state: State ={
-        story_library: story_library,
-        random_story_library: [story_library.A1E1],
-        queued_stories: [],
+    state: State = {
+        story_library: {
+          A1E1: new StoryEvent(A1E1)
+        },
         story_history: [],
 
         current_story: null,
         current_story_node: null,
-        current_story_history: []
-    },
-    action: StoryAction
+        current_story_history: [],
+        story_queue: []
+    }, action: StoryAction | SetNewStoryNode
 ) => {
-    switch(action.type) {
+    switch (action.type) {
         case GET_NEW_STORY:
             const {new_story} = action;
             if (new_story === "NEXT") {
-                if (state.queued_stories.length < 1) { // Select a random story.
-                    let random_story_library = state.random_story_library;
-                    let story = random_story_library[Math.floor(Math.random()*random_story_library.length)];
+                // TODO set state equivalent for the next queued story
+                if (state.story_queue.length < 1) {
+                    let keys = Object.keys(state.story_library);
                     return {
-                        ...state,
-                        current_story: story,
-                        current_story_node: "entry",
-                        current_story_history: [],
+                    ...state,
+                    current_story: state[keys[keys.length * Math.random() << 0]],
+                    current_story_node: "entry",
+                    current_story_history: [],
 
-                        story_history: [...state.story_history, state.current_story_history]
-                    }
-                } else { // Select the first story from the list.
+                    story_history: [...state.story_history, state.current_story_history]
+                }
+                } else {
                     return {
-                        ...state,
-                        current_story: state.queued_stories[0],
-                        current_story_node: "entry",
-                        current_story_history: [],
-                        queued_stories: state.queued_stories.slice(1, state.queued_stories.length),
+                    ...state,
+                    current_story: state.story_queue[0],
+                    current_story_node: "entry",
+                    current_story_history: [],
 
-                        story_history: [...state.story_history, state.current_story_history]
+                    story_queue: state.story_queue.slice(1, state.story_queue.length),
+                    story_history: [...state.story_history, state.current_story_history]
                     }
                 }
+
             }
+            // Use this side of things if you want to trigger a certain story.
             return {
                 ...state,
                 current_story: state.story_library[new_story],
@@ -72,21 +70,12 @@ const storyReducer = (
 
                 story_history: [...state.story_history, state.current_story_history]
             };
-        case UPDATE_STORY_NODE:
-            const {story_node} = action;
+        case SET_NEW_STORY_NODE:
+            const {new_story_node} = action;
             return {
                 ...state,
-                current_story_node: story_node,
+                current_story_node: new_story_node,
                 current_story_history: [...state.current_story_history, state.current_story_node]
-            };
-        case FINISH_STORY:
-            return {
-                ...state,
-                current_story: null,
-                current_story_node: null,
-                current_story_history: [],
-
-                story_history: [...state.story_history, state.current_story_history]
             };
         default:
             return state;

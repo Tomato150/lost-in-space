@@ -15,14 +15,14 @@ type Props = {
 export default function StoryResults(props: Props) {
     const {dispatch, results} = props;
 
-    if (!(results)) return [];
+    if (!(results)) return null ;
 
     let results_data = [];
 
     for (let result of results) {
         const {result_text, result_type, effect} = result;
         let effects_data = effect.split(' ');
-        // TODO dispatch here.
+        dispatch();
         if (result_text) {
             results_data.push({
                 key: results_data.length,
@@ -39,7 +39,7 @@ export default function StoryResults(props: Props) {
                 key={1001}
                 data={results_data}
                 renderItem={({item}) => {
-                    return (<CustomText color={item.color}>- {item.text}</CustomText>)
+                    return (<CustomText style={{color: item.color}}>- {item.text}</CustomText>)
                 }}
             />
         ];
