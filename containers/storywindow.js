@@ -7,7 +7,7 @@ import StoryFlavourText from '../components/storyflavourtext';
 import StoryResults from '../components/storyresults';
 import StoryChoices from '../components/storychoices';
 
-import {setNewStoryNode} from "../actions/storyactions";
+import {updateStoryNode} from "../actions/storyactions";
 import StoryEvent from '../game/stories/storyevent';
 import A1E1 from '../game/stories/storyjsons/A1E1.json';
 
@@ -26,11 +26,10 @@ export default connect(store => {
 })(class StoryWindow extends Component<Props> {
     constructor(props: Props) {
         super(props);
-
     }
 
     changeStoryNode = (choice_selected: string): void => {
-        this.props.dispatch(setNewStoryNode(choice_selected))
+        this.props.dispatch(updateStoryNode(choice_selected))
     };
 
     storyFinished = ():void => {
@@ -48,7 +47,6 @@ export default connect(store => {
                 />
                 <StoryResults
                     dispatch={dispatch}  // TODO make it so it's a call back and then add dispatch to props.
-                                         // I.E., this.props[function_var] for the dispatch.
                     results={current_story.story_nodes[current_story_node].results}
                 />
                 <StoryChoices

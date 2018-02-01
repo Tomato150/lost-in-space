@@ -1,6 +1,6 @@
 // @flow
-import {GET_NEW_STORY, SET_NEW_STORY_NODE} from '../actions/keywords';
-import type {GetNewStory, SetNewStoryNode} from "../actions/storyactions";
+import {GET_NEW_STORY, UPDATE_STORY_NODE} from '../actions/keywords';
+import type {GetNewStory, updateStoryNode} from "../actions/storyactions";
 
 import StoryEvent from "../game/stories/storyevent";
 import A1E1 from "../game/stories/storyjsons/A1E1.json";
@@ -31,7 +31,7 @@ const storyReducer = (
         current_story_node: null,
         current_story_history: [],
         story_queue: []
-    }, action: StoryAction | SetNewStoryNode
+    }, action: StoryAction | updateStoryNode
 ) => {
     switch (action.type) {
         case GET_NEW_STORY:
@@ -59,7 +59,6 @@ const storyReducer = (
                     story_history: [...state.story_history, state.current_story_history]
                     }
                 }
-
             }
             // Use this side of things if you want to trigger a certain story.
             return {
@@ -70,12 +69,23 @@ const storyReducer = (
 
                 story_history: [...state.story_history, state.current_story_history]
             };
-        case SET_NEW_STORY_NODE:
+
+        case UPDATE_STORY_NODE:
             const {new_story_node} = action;
             return {
                 ...state,
                 current_story_node: new_story_node,
                 current_story_history: [...state.current_story_history, state.current_story_node]
+            };
+
+        case FINISH_STORY:
+            return {
+                ...state,
+                current_story: null,
+                current_story_node: null,
+                current_story_history: [],
+
+                story_history: [...state.story_history, state.current_story_history]
             };
         default:
             return state;
