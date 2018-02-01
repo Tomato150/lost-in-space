@@ -10,9 +10,9 @@ import CustomText from '../utils/customtext';
 import {app_styles} from '../utils/appstyles'
 
 import {updateMarines} from "../actions/crewactions";
+import {STORY, INVENTORY} from '../actions/keywords';
 import {getNewStory} from "../actions/storyactions";
 import StoryEvent from "../game/stories/storyevent";
-import A1E1 from '../game/stories/storyjsons/A1E1.json';
 import type {GameCoreState} from "../reducers/gamecorereducer";
 
 type Props = {
@@ -42,10 +42,10 @@ export default connect(store => {
                 <View style={{alignItems: "center"}}>
                     <CustomText>Lost in Space</CustomText>
                     <View style={app_styles.horizontalRule}/>
-                    <CustomText>{(current_phase === "Story") ? "Event Phase" : "Management Phase"}</CustomText>
+                    <CustomText>{(current_phase === STORY) ? "Event Phase" : "Management Phase"}</CustomText>
                 </View>
 
-                {current_phase === 'Story' ?
+                {current_phase === STORY ?
                     <StoryWindow
                     /> :
                     <InventoryWindow

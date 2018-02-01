@@ -1,6 +1,6 @@
 // @flow
-import {GET_NEW_STORY, UPDATE_STORY_NODE} from '../actions/keywords';
-import type {GetNewStory, updateStoryNode} from "../actions/storyactions";
+import {GET_NEW_STORY, UPDATE_STORY_NODE, FINISH_STORY} from '../actions/keywords';
+import type {GetNewStory, UpdateStoryNode} from "../actions/storyactions";
 
 import StoryEvent from "../game/stories/storyevent";
 import A1E1 from "../game/stories/storyjsons/A1E1.json";
@@ -31,7 +31,7 @@ const storyReducer = (
         current_story_node: null,
         current_story_history: [],
         story_queue: []
-    }, action: StoryAction | updateStoryNode
+    }, action: StoryAction | UpdateStoryNode
 ) => {
     switch (action.type) {
         case GET_NEW_STORY:
@@ -41,22 +41,19 @@ const storyReducer = (
                 if (state.story_queue.length < 1) {
                     let keys = Object.keys(state.story_library);
                     return {
-                    ...state,
-                    current_story: state[keys[keys.length * Math.random() << 0]],
-                    current_story_node: "entry",
-                    current_story_history: [],
-
-                    story_history: [...state.story_history, state.current_story_history]
-                }
+                        ...state,
+                        current_story: state[keys[keys.length * Math.random() << 0]],
+                        current_story_node: "entry",
+                        current_story_history: []
+                    }
                 } else {
                     return {
-                    ...state,
-                    current_story: state.story_queue[0],
-                    current_story_node: "entry",
-                    current_story_history: [],
+                        ...state,
+                        current_story: state.story_queue[0],
+                        current_story_node: "entry",
+                        current_story_history: [],
 
-                    story_queue: state.story_queue.slice(1, state.story_queue.length),
-                    story_history: [...state.story_history, state.current_story_history]
+                        story_queue: state.story_queue.slice(1, state.story_queue.length),
                     }
                 }
             }
@@ -66,8 +63,6 @@ const storyReducer = (
                 current_story: state.story_library[new_story],
                 current_story_node: "entry",
                 current_story_history: [],
-
-                story_history: [...state.story_history, state.current_story_history]
             };
 
         case UPDATE_STORY_NODE:

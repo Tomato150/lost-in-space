@@ -17,7 +17,7 @@ export default class Text extends React.Component<Props> {
     render() {
         const {style, color, children} = this.props;
         return (
-            <ReactNative.Text style={{...style, color}}>{children}</ReactNative.Text>
+            <ReactNative.Text style={{...style, color: color}}>{children}</ReactNative.Text>
         )
     }
 }
